@@ -1,14 +1,40 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="grey">
     <ion-title>
-      Ionic Blank
+      8Gag
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  
+  <ion-card *ngFor="let post of posts | async">
+
+    <img [src]="post.img">
+    <ion-card-content>
+
+      <ion-card-title>{{post.title}}</ion-card-title>
+      <button ion-button 
+                clear small 
+                color="secodary"
+                right 
+                icon-left>
+          <ion-icon name="share-alt"></ion-icon>
+          Compartir
+        </button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-fab bottom right>
+    
+    <button ion-fab
+            color="primary"
+            (click)="showModal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    
+  </ion-fab>
+
 </ion-content>
