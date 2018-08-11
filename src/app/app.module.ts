@@ -5,6 +5,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,6 +14,8 @@ import { UploadPage } from '../pages/upload/upload';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { UploadFileProvider } from '../providers/upload-file/upload-file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBfYsz9VSRBz194jTuW2VViarsFHFU_ww8",
@@ -48,7 +51,10 @@ export const firebaseConfig = {
     SplashScreen,
     AngularFireDatabase,
     Camera,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    ImagePicker,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UploadFileProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}

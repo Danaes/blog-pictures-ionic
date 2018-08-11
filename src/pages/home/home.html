@@ -8,21 +8,22 @@
 
 <ion-content>
   
-  <ion-card *ngFor="let post of posts | async">
+  <ion-card *ngFor="let post of _ufp.imagenes">
 
     <img [src]="post.img">
     <ion-card-content>
 
       <ion-card-title>{{post.title}}</ion-card-title>
-      <button ion-button 
-                clear small 
-                color="secodary"
-                right 
-                icon-left>
+      <ion-buttons right>
+        <button ion-button 
+                  clear small 
+                  color="secodary" 
+                  icon-left
+                  (click)="share( post )">
           <ion-icon name="share-alt"></ion-icon>
           Compartir
         </button>
-
+      </ion-buttons>
     </ion-card-content>
 
   </ion-card>
@@ -36,5 +37,10 @@
     </button>
     
   </ion-fab>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)"
+                        [enabled]="hayMas">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

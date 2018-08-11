@@ -1,14 +1,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons right>
+    <ion-buttons left>
       <button ion-button
               color="danger"
               (click)="closeModal()">
         Cerrar
       </button>
     </ion-buttons>
+
     <ion-title>{{ title | placeHolder: 'Crear Post' }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button
+              [disabled]="imgPreview.length <= 1 || title.length <= 1"
+              color="secondary"
+              (click)="createPost()">
+        Subir
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -36,7 +46,8 @@
           <button ion-button 
                   block
                   icon-left
-                  color="primary">
+                  color="primary"
+                  (click)="selectPhoto()">
             <ion-icon name="photos"></ion-icon>
             Seleccionar
           </button>

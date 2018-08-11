@@ -1,8 +1,8 @@
+import { UploadFileProvider } from './../../providers/upload-file/upload-file';
 import { UploadPage } from './../upload/upload';
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-home',
@@ -10,13 +10,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  posts: Observable<any[]>;
+  hayMas: boolean = true;
 
   constructor(private modalCtrl: ModalController,
-              private afDB: AngularFireDatabase) {
-
-    console.warn("constructor");
-    this.posts = afDB.list('post').valueChanges();  
+              private socialSharing: SocialSharing,
+              private _ufp: UploadFileProvider) {
 
   }
 
@@ -25,6 +23,24 @@ export class HomePage {
     let modal = this.modalCtrl.create( UploadPage );
 
     modal.present();
+  }
+
+  doInfinite(infiniteScroll) {
+    this._ufp.loadImages().then((hayMas: boolean) => {
+      
+      this.hayMas = hayMas;
+      infiniteScroll.complete();
+
+    });
+  }
+
+  share( post:any ){
+
+    this.socialSharing.share(post.title, "Estas compartiendo un post", post.img, post.img)
+      .then(() => {} )  // Success!
+      .catch(() => {} // Error!
+    );
+
   }
 
 }
